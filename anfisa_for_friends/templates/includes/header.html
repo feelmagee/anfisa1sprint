@@ -1,17 +1,35 @@
 {% load static %}
 <header>
-  <img src="{% static 'img/logo.png' %}" height="50" alt="">
-  <nav>
-    <ul>
-      <li>
-        <a href="{% url 'homepage:index' %}">Главная</a>  
-      </li>
-      <li>
-        <a href="{% url 'ice_cream:ice_cream_list' %}">Каталог мороженого</a>       
-      </li>
-      <li>
-        <a href="{% url 'about:description' %}">О проекте</a>
-      </li>
-    </ul>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav nav-pills">
+                    {% url 'homepage:index' as index_url %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == index_url %}active{% endif %}" href="{{ index_url }}">
+                            Главная
+                        </a>
+                    </li>
+                    {% url 'ice_cream:ice_cream_list' as list_url %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == list_url %}active{% endif %}" href="{{ list_url }}">
+                            Каталог мороженого
+                        </a>
+                    </li>
+                    {% url 'about:description' as about_url %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{{ about_url }}">
+                            О проекте
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a class="navbar-brand" href="{{ index_url }}">
+                <img src="{% static 'img/logo.png' %}" height="50" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+    </nav>
 </header>

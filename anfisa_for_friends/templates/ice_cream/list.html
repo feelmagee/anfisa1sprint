@@ -1,19 +1,28 @@
 {% extends "base.html" %}
-{% block title %}
-  Анфиса для друзей. Каталог мороженого
-{% endblock %}
+{% load static %}
+
+{% block title %}Анфиса для друзей. Каталог мороженого{% endblock %}
+
 {% block content %}
-  <h1>Каталог мороженого</h1>
-  <ul>
+  <h1 class="pb-2 mb-4">Каталог мороженого</h1>
+  <div class="row">
     {% for ice_cream in ice_cream_list %}
-      <li>
-        <h3>{{ ice_cream.title }}</h3>
-        <p>{{ ice_cream.description|truncatewords:10 }}</p>
-        <a href="{% url 'ice_cream:ice_cream_detail' ice_cream.id %}">подробнее</a>
-      </li>
-      {% if not forloop.last %}
-        <hr>
-      {% endif %}
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title">{{ ice_cream.title }}</h3>
+            <p class="card-text">{{ ice_cream.description|truncatewords:10 }}</p>
+            <a href="{% url 'ice_cream:ice_cream_detail' ice_cream.id %}" 
+               class="btn btn-primary">
+              Подробнее
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p>Мороженое не найдено.</p>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
